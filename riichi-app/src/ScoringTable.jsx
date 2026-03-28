@@ -28,6 +28,7 @@ function commaNum(num) {
 
 function ScoringTable({
   mini,
+  lightTheme,
   setScoringTab,
   simpleScoring,
   setSimpleScoring,
@@ -129,7 +130,7 @@ function ScoringTable({
   const fullSettings = (
     <>
       <Box sx={{ display: "flex", justifyContent: "center" }}>
-      <FormGroup sx={{ padding: "0 16px" }}>
+      <FormGroup sx={{ padding: "0 16px", color: "black", borderRadius: "8px", backgroundColor: (lightTheme === "light" ? "white" : "#f5f5f5" ), marginBottom: "10px" }}>
         <FormControlLabel control={
           <Checkbox
             checked={dealer}
@@ -146,7 +147,7 @@ function ScoringTable({
     <>
       <h2>Scoring Table</h2>
       <Box style={{display: "flex"}}>
-        <FormGroup sx={{ padding: "0 16px" }}>
+        <FormGroup sx={{ padding: "0 16px", borderRadius: "8px", color: "black", backgroundColor: (lightTheme === "light" ? "white" : "#f5f5f5" ) }}>
           <FormControlLabel control={
             <Switch
               checked={simpleScoring}
@@ -158,7 +159,7 @@ function ScoringTable({
       </Box>
       <Box sx={{ padding: "16px" }}>
         <span>Win type: </span>
-        <NativeSelect value={win} onChange={handleWinDropChange} sx={{ padding: "0 16px" }}>
+        <NativeSelect value={win} onChange={handleWinDropChange} sx={{ padding: "0 16px", borderRadius: "8px", backgroundColor: (lightTheme === "light" ? "white" : "#f5f5f5" ) }}>
           <option value={0}>Ron</option>
           <option value={1}>Tsumo</option>
         </NativeSelect>

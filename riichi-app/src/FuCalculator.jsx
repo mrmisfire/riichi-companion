@@ -33,6 +33,7 @@ function commaNum(num) {
 
 function FuCalculator({
   mini,
+  lightTheme,
   simpleScoring,
   setSimpleScoring,
   dealer,
@@ -128,14 +129,14 @@ function FuCalculator({
   const fullSettings = (
     <>
       <Box sx={{ display: "flex", justifyContent: "center" }}>
-      <FormGroup sx={{ padding: "0 16px" }}>
+      <FormGroup sx={{ padding: "0 16px", color: "black", borderRadius: "8px", backgroundColor: (lightTheme === "light" ? "white" : "#f5f5f5" ) }}>
         <FormControlLabel control={
           <Checkbox
             checked={dealer}
             onChange={handleDealerSwitchChange}
             slotProps={{ input: { 'aria-label': 'controlled' } }}
           />
-        } label="Dealer win" />
+        } label=" Dealer win" />
       </FormGroup>
       </Box>
     </>
@@ -417,7 +418,7 @@ function FuCalculator({
     <>
       <h2>Score Calculator</h2>
       <Box style={{display: "flex"}}>
-        <FormGroup sx={{ padding: "0 16px" }}>
+        <FormGroup sx={{ padding: "0 16px", borderRadius: "8px", color: "black", backgroundColor: (lightTheme === "light" ? "white" : "#f5f5f5" ) }}>
           <FormControlLabel control={
             <Switch
               checked={simpleScoring}
@@ -429,7 +430,7 @@ function FuCalculator({
       </Box>
       <Box sx={{ padding: "16px" }}>
         <span>Win type: </span>
-        <NativeSelect value={win} onChange={handleWinDropChange} sx={{ padding: "0 16px" }}>
+        <NativeSelect value={win} onChange={handleWinDropChange} sx={{ padding: "0 16px", borderRadius: "8px", backgroundColor: (lightTheme === "light" ? "white" : "#f5f5f5" ) }}>
           <option value={0}>Ron</option>
           <option value={1}>Tsumo</option>
         </NativeSelect>

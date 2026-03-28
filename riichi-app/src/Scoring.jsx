@@ -23,6 +23,7 @@ import NativeSelect from '@mui/material/NativeSelect';
 
 function Scoring({
   mini,
+  lightTheme,
   simpleScoring,
   setSimpleScoring,
   scoringTab,
@@ -119,7 +120,7 @@ function Scoring({
   }
 
   const tabMenu = (
-    <Tabs value={scoringTab} onChange={handleTabChange} sx={{ marginBottom: "20px" }} centered>
+    <Tabs value={scoringTab} onChange={handleTabChange} sx={{ marginBottom: "20px" }} centered textColor={(lightTheme === "light" ? "#434343" : "#f5f5f5" )}>
       <Tab label="Score Calculator" />
       <Tab label="Scoring Table" />
       <Tab label="Tenbou" />
@@ -127,7 +128,7 @@ function Scoring({
   )
 
   const dropMenu = (
-    <NativeSelect value={scoringTab} onChange={handleDropChange} sx={{ marginBottom: "20px" }}>
+    <NativeSelect value={scoringTab} onChange={handleDropChange} sx={{ marginBottom: "20px", padding: "10px", borderRadius: "8px", backgroundColor: (lightTheme === "light" ? "white" : "#f5f5f5" ) }}>
       <option value={0}>Score Calculator</option>
       <option value={1}>Scoring Table</option>
       <option value={2}>Tenbou</option>
@@ -140,6 +141,7 @@ function Scoring({
       {mini ? dropMenu : tabMenu}
       {scoringTab === 0 && <FuCalculator
         mini={mini}
+        lightTheme={lightTheme}
         simpleScoring={simpleScoring}
         setSimpleScoring={setSimpleScoring}
         dealer={dealer}
@@ -167,6 +169,7 @@ function Scoring({
       />}
       {scoringTab === 1 && <ScoringTable
         mini={mini}
+        lightTheme={lightTheme}
         setScoringTab={setScoringTab}
         simpleScoring={simpleScoring}
         setSimpleScoring={setSimpleScoring}
@@ -191,7 +194,7 @@ function Scoring({
         triplets={triplets}
         setTriplets={setTriplets}
       />}
-      {scoringTab === 2 && <TenbouReference tenbouColor={tenbouColor} setTenbouColor={setTenbouColor}/>}
+      {scoringTab === 2 && <TenbouReference lightTheme={lightTheme} tenbouColor={tenbouColor} setTenbouColor={setTenbouColor}/>}
     </>
   )
 }

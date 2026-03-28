@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import './App.css'
 
 import Box from '@mui/material/Box';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import Paper from '@mui/material/Paper';
 import Icon from '@mui/material/Icon';
+import IconButton from '@mui/material/IconButton';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 import YakuList from './YakuList.jsx';
@@ -19,6 +19,10 @@ import FeedbackIcon from '@mui/icons-material/Feedback';
 import CasinoIcon from '@mui/icons-material/Casino';
 import TocIcon from '@mui/icons-material/Toc';
 import CalculateIcon from '@mui/icons-material/Calculate';
+import LightModeIcon from '@mui/icons-material/LightMode';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+
+import './App.css'
 
 const theme = createTheme({
   components: {
@@ -76,7 +80,32 @@ function App() {
       open: 0,
       value: 0,
     },
-  ])
+  ]);
+  const [lightTheme, setLightTheme] = useState(() => {   
+    const savedTheme = localStorage.getItem("theme");   
+    if (savedTheme) return savedTheme;   
+    const prefersDark = window.matchMedia(       
+      "(prefers-color-scheme: dark)"    
+    ).matches;   
+    return prefersDark ? "dark" : "light"; 
+  });
+
+  const [checked, setChecked] = useState(lightTheme === "light" ? false : true);
+  const [lightChecked, setLightChecked] = useState(false);
+
+  useEffect(() => {     
+    // Update the HTML element's data-theme attribute 
+    document.documentElement.setAttribute("data-theme", lightTheme);
+
+    // Persist in localStorage  
+    localStorage.setItem("theme", lightTheme);
+  }, [lightTheme]); 
+
+  const toggleTheme = () => {
+    setLightChecked(!lightChecked);
+    setChecked((prev) => (prev === true ? false : true));
+    setLightTheme((prevTheme) => (prevTheme === "dark" ? "light" : "dark"));
+  };
 
   useEffect(() => {
     const updateMenu = () => {
@@ -98,12 +127,25 @@ function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'end',
+            borderRadius: 1,
+          }}
+        >
+          <IconButton sx={{ ml: 1 }} onClick={toggleTheme} color="inherit">
+            {lightTheme === 'light' ? <LightModeIcon /> : <DarkModeIcon />}
+          </IconButton>
+        </Box>
         <Box sx={{ pb: 7, overflow: "auto" }}>
           {nav === 0 && <TileReference mini={mini} />}
-          {nav === 1 && <YakuList mini={mini} english={english} setEnglish={setEnglish} yakuTab={yakuTab} setYakuTab={setYakuTab} />}
-          {nav === 2 && <Calls />}
+          {nav === 1 && <YakuList mini={mini} english={english} setEnglish={setEnglish} yakuTab={yakuTab} setYakuTab={setYakuTab} lightTheme={lightTheme} />}
+          {nav === 2 && <Calls lightTheme={lightTheme} />}
           {nav === 3 && <Scoring
             mini={mini}
+            lightTheme={lightTheme}
             simpleScoring={simpleScoring}
             setSimpleScoring={setSimpleScoring}
             scoringTab={scoringTab}

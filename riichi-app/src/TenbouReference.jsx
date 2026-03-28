@@ -22,7 +22,7 @@ function commaNum(num) {
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
-function TenbouReference({ tenbouColor, setTenbouColor }) {
+function TenbouReference({ lightTheme, tenbouColor, setTenbouColor }) {
   const handleSwitchChange = (event) => {
     setTenbouColor(event.target.checked);
   };
@@ -67,15 +67,17 @@ function TenbouReference({ tenbouColor, setTenbouColor }) {
     <>
       <h2>Tenbou Point Sticks</h2>
       <div className='yaku-list'>
-      <FormGroup sx={{ padding: "0 16px" }}>
-        <FormControlLabel control={
-          <Switch
-            checked={tenbouColor}
-            onChange={handleSwitchChange}
-            slotProps={{ input: { 'aria-label': 'controlled' } }}
-          />
-        } label="Colored Tenbou" />
-      </FormGroup>
+      <Box style={{display: "flex"}}>
+        <FormGroup sx={{ padding: "0 16px", borderRadius: "8px", color: "black", backgroundColor: (lightTheme === "light" ? "white" : "#f5f5f5" ) }}>
+          <FormControlLabel control={
+            <Switch
+              checked={tenbouColor}
+              onChange={handleSwitchChange}
+              slotProps={{ input: { 'aria-label': 'controlled' } }}
+            />
+          } label="Colored Tenbou" />
+        </FormGroup>
+      </Box>
       <table className='tenbou-table'>
         <thead>
           <tr>

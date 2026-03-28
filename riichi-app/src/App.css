@@ -17,6 +17,40 @@
   --gray_light: #ffffff;
   --gray_mid: #fafafa;
   --gray_dark: #f5f5f5;
+  --text: black;
+  --score_main: #d2cae6;
+  --score_fu: #c4def4;
+  --score_trip: #d9ead3;
+  --yaku: #999999;
+}
+
+:root[data-theme="dark"] {
+  /*--purple_light: #674ea7;
+  --purple_mid: #351c75;
+  --purple_dark: #20124d;*/
+  --purple_light: #8e7cc3;
+  --purple_mid: #674ea7;
+  --purple_dark: #351c75;
+  --blue_light: #3d85c6;
+  --blue_mid: #0b5394;
+  --blue_dark: #073763;
+  --red_light: #cc0000;
+  --red_mid: #990000;
+  --red_dark: #660000;
+  --yellow_light: #f1c232;
+  --yellow_mid: #bf9000;
+  --yellow_dark: #7f6000;
+  --green_light: #6aa84f;
+  --green_mid: #38761d;
+  --green_dark: #274e13;
+  --gray_light: #999999;
+  --gray_mid: #666666;
+  --gray_dark: #434343;
+  --text: white;
+  --score_main: #b4a7d6;
+  --score_fu: #a3caed;
+  --score_trip: #beddb3;
+  --yaku: #434343;
 }
 
 #root {
@@ -131,6 +165,54 @@ th {
   width: 60%;
 }
 
+.yaku-gameplay {
+  background-color: var(--purple_mid);
+}
+
+.yaku-closed {
+  background-color: var(--blue_light);
+}
+
+.yaku-penalty {
+  background-color: var(--blue_mid);
+}
+
+.yaku-open {
+  background-color: var(--blue_dark);
+}
+
+.yaku-closedyakuman {
+  background-color: var(--red_mid);
+}
+
+.yaku-openyakuman {
+  background-color: var(--red_dark);
+}
+
+.yaku-lucky {
+  background-color: var(--yellow_mid);
+}
+
+.yaku-luckyyakuman {
+  background-color: var(--yellow_dark);
+}
+
+.yaku-special {
+  background-color: var(--green_mid);
+}
+
+.yaku-closedhan {
+  background-color: var(--gray_light);
+}
+
+.yaku-openhan {
+  background-color: var(--gray_dark);
+}
+
+.yaku-anyhan {
+  background-color: var(--gray_mid);
+}
+
 .yaku-list {
   width: 50vw;
   max-width: 1280px;
@@ -151,7 +233,8 @@ th {
 
 .yaku-tiles-container {
   padding: 10px;
-  background-color: rgba(0,0,0,0.08);
+  background-color: var(--yaku);
+  color: white;
   border-radius: 10px;
   margin: 16px auto;
   width: fit-content;
@@ -159,7 +242,7 @@ th {
 
 .yaku-tiles {
   width: 42px;
-  padding: 0 2px 0 2px;
+  padding: 0 3px 0 3px;
 }
 
 .yaku-tiles.kan {
@@ -214,11 +297,13 @@ table.td-main, table.td-fu, table.td-trip {
 }
 
 table.td-main tr {
-  background-color: var(--purple_mid);
+  background-color: var(--score_main);
+  color: black;
 }
 
 table.td-fu tr {
-  background-color: var(--blue_mid);
+  background-color: var(--score_fu);
+  color: black;
 }
 
 table.td-main td, table.td-fu td, table.td-trip td {
@@ -254,7 +339,7 @@ table.td-fu ul {
 }
 
 table.td-trip tr.trip-enabled {
-  background-color: var(--green_mid);
+  background-color: var(--score_trip);
 }
 
 table.td-trip tr.trip-disabled {
@@ -405,4 +490,9 @@ h1.invalid {
   .yaku-tiles.kan.rotated {
     height: 34px;
   }
+}
+
+:root[data-theme="dark"] {   
+  background-color: #242424;
+  color: white;
 }

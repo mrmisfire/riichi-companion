@@ -5,7 +5,6 @@ import './App.css'
 import YakuTiles from './YakuTiles.jsx'
 import Item from './Item.jsx'
 import YAKUS from './Yakus.jsx'
-import YAKUCOLORS from './Colors.jsx'
 
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -20,9 +19,29 @@ import Switch from '@mui/material/Switch';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
-function YakuItem({ mini, yaku, english, yakuTab}) {
+function YakuItem({ mini, yaku, english, yakuTab, lightTheme }) {
+  function getColor(cssVar) {
+    const style = window.getComputedStyle(document.body);
+    return style.getPropertyValue('--' + cssVar);
+  }
+
+  const YAKUCOLORS = {
+    gameplay: getColor("purple_mid"),
+    closed: getColor("blue_light"),
+    penalty: getColor("blue_mid"),
+    open: getColor("blue_dark"),
+    closedyakuman: getColor("red_mid"),
+    openyakuman: getColor("red_dark"),
+    lucky: getColor("yellow_mid"),
+    luckyyakuman: getColor("yellow_dark"),
+    special: getColor("green_mid"),
+    closedhan: getColor("gray_light"),
+    openhan: getColor("gray_dark"),
+    anyhan: getColor("gray_mid"),
+    text: getColor("text"),
+  }
+
   const [expanded, setExpanded] = useState(null);
-  console.log("render");
   const handleExpandChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
@@ -58,12 +77,17 @@ function YakuItem({ mini, yaku, english, yakuTab}) {
       }
       break;
   }
+  // let bgColor = YAKUCOLORS[yaku["type"]];
   let bgColor = YAKUCOLORS[yaku["type"]];
+  let txtColor = YAKUCOLORS["text"];
   let yakuMain = yaku["ename"];
   let yakuSub = yaku["jname"];
   if (!english) {
     yakuMain = yaku["jname"];
     yakuSub = yaku["ename"];
+  }
+  if (yaku["jname"] === yaku["ename"]) {
+    yakuSub = "";
   }
   let closedHan;
   let openHan;
@@ -81,17 +105,17 @@ function YakuItem({ mini, yaku, english, yakuTab}) {
   let hanGrid = (
     <>
     <Grid size={mini ? 3 : 2}>
-      <Item sx={{ fontWeight: "bold", backgroundColor: YAKUCOLORS["closedhan"] }}>{closedHan}</Item>
+      <Item sx={{ fontWeight: "bold", backgroundColor: YAKUCOLORS["closedhan"], color: txtColor }}>{closedHan}</Item>
     </Grid>
     <Grid size={mini ? 3 : 2}>
-      <Item sx={{ fontWeight: "bold", backgroundColor: YAKUCOLORS["openhan"] }}>{openHan}</Item>
+      <Item sx={{ fontWeight: "bold", backgroundColor: YAKUCOLORS["openhan"], color: txtColor }}>{openHan}</Item>
     </Grid>
     </>
   )
   if (yaku["closedh"] === yaku["openh"]) {
     hanGrid = (
       <Grid size={mini ? 6 : 4}>
-        <Item sx={{ fontWeight: "bold", backgroundColor: YAKUCOLORS["anyhan"] }}>{closedHan}</Item>
+        <Item sx={{ fontWeight: "bold", backgroundColor: YAKUCOLORS["anyhan"], color: txtColor }}>{closedHan}</Item>
       </Grid>
     )
   }
@@ -114,7 +138,7 @@ function YakuItem({ mini, yaku, english, yakuTab}) {
   const idx = yaku["jname"].split(" ").join("-");
 
   return (
-    <Accordion sx={{ backgroundColor: bgColor }} id={"panel-" + idx} expanded={expanded === 'panel-' + idx} onChange={handleExpandChange('panel-' + idx)}>
+    <Accordion sx={{ backgroundColor: bgColor, color: txtColor }} id={"panel-" + idx} expanded={expanded === 'panel-' + idx} onChange={handleExpandChange('panel-' + idx)}>
       <AccordionSummary sx={{ margin: "0px" }} id="panel-header" aria-controls="panel-content">
         <Box sx={{ flexGrow: 1 }}>
           <Grid container spacing={2} alignItems="center">

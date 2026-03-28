@@ -1,7 +1,7 @@
 const YAKUS = [
     {
-        jname: "Menzenchin Tsumohou",
-        ename: "Win by Self-Draw",
+        jname: "Menzen Tsumo",
+        ename: "Self-Drawn Hand",
         type: "gameplay",
         closedh: 1,
         openh: 0,
@@ -16,7 +16,7 @@ const YAKUS = [
     },
     {
         jname: "Riichi",
-        ename: "Ready Hand",
+        ename: "Riichi",
         type: "gameplay",
         closedh: 1,
         openh: 0,
@@ -46,7 +46,7 @@ const YAKUS = [
     },
     {
         jname: "Pinfu",
-        ename: "Minimum Fu",
+        ename: "Pinfu",
         type: "closed",
         closedh: 1,
         openh: 0,
@@ -80,7 +80,11 @@ const YAKUS = [
                 Closed hand that contains two identical sequences.
             </>
         ),
-        note: null,
+        note: (
+            <>
+                Note: Incompatible with <b>Chiitoitsu</b> (Seven Pairs)
+            </>
+        ),
         examplehand: {
             hand: "12m445566p11678s",
             kan: null,
@@ -111,7 +115,7 @@ const YAKUS = [
     },
     {
         jname: "Ryanpeikou",
-        ename: "Two Sets of Identical Sequences",
+        ename: "Double Identical Sequences",
         type: "closed",
         closedh: 3,
         openh: 0,
@@ -120,7 +124,13 @@ const YAKUS = [
                 Closed hand that contains two sets of two identical sequences.
             </>
         ),
-        note: null,
+        note: (
+            <>
+                Note: Incompatible with <b>Chiitoitsu</b> (Seven Pairs)<br></br>
+                <br></br>
+                Does not combine scores with <b>Iipeikou</b> (Identical Sequences)
+            </>
+        ),
         examplehand: {
             hand: "112233m77p56677s",
             kan: null,
@@ -130,8 +140,8 @@ const YAKUS = [
         difficulty: "full",
     },
     {
-        jname: "Chantaiyao",
-        ename: "Terminal or Honor in Each Group",
+        jname: "Chanta",
+        ename: "Terminal or Honor in Each Meld",
         type: "penalty",
         closedh: 2,
         openh: 1,
@@ -151,7 +161,7 @@ const YAKUS = [
     },
     {
         jname: "Sanshoku Doujun",
-        ename: "Three-Colored Straight",
+        ename: "Three-Colored Sequence",
         type: "penalty",
         closedh: 2,
         openh: 1,
@@ -170,7 +180,7 @@ const YAKUS = [
         difficulty: "intermediate",
     },
     {
-        jname: "Ittsu",
+        jname: "Ittsuu",
         ename: "Straight",
         type: "penalty",
         closedh: 2,
@@ -190,7 +200,7 @@ const YAKUS = [
         difficulty: "intermediate",
     },
     {
-        jname: "Junchan Taiyao",
+        jname: "Junchan",
         ename: "Terminal in Each Meld",
         type: "penalty",
         closedh: 3,
@@ -202,7 +212,7 @@ const YAKUS = [
         ),
         note: (
             <>
-                (Note: Does not stack with <b>Chantaiyao</b>)
+                Note: Does not combine scores with <b>Chanta</b> (Terminal or Honor in Each Meld)
             </>
         ),
         examplehand: {
@@ -214,7 +224,7 @@ const YAKUS = [
         difficulty: "full",
     },
     {
-        jname: "Honitsu",
+        jname: "Honiisou",
         ename: "Half Flush",
         type: "penalty",
         closedh: 3,
@@ -234,7 +244,7 @@ const YAKUS = [
         difficulty: "intermediate",
     },
     {
-        jname: "Chinitsu",
+        jname: "Chiniisou",
         ename: "Flush",
         type: "penalty",
         closedh: 6,
@@ -346,7 +356,7 @@ const YAKUS = [
         ),
         note: (
             <>
-                (Note: Closed triplets can't be completed by calling <b>"Ron"</b>)
+                Note: Closed triplets can't be completed by calling <b>"Ron"</b>
             </>
         ),
         examplehand: {
@@ -359,7 +369,7 @@ const YAKUS = [
     },
     {
         jname: "Sanshoku Doukou",
-        ename: "Three-Colored Triplets",
+        ename: "Three-Colored Triplet",
         type: "open",
         closedh: 2,
         openh: 2,
@@ -399,7 +409,7 @@ const YAKUS = [
     },
     {
         jname: "Honroutou",
-        ename: "Terminals and Honors",
+        ename: "All Terminals and Honors",
         type: "open",
         closedh: 4,
         openh: 4,
@@ -410,7 +420,9 @@ const YAKUS = [
         ),
         note: (
             <>
-                (Note: Score for <b>Toitoi</b> or <b>Chiitoitsu</b> is accounted for)
+                Note: This yaku can't be formed without either <b>Toitoi</b> (All Triplets) or <b>Chiitoitsu</b> (Seven Pairs) so the <b>4 Han</b> score listed accounts for either combination.<br></br>
+                <br></br>
+                Does not combine scores with <b>Chanta</b> (Terminal or Honor in Each Meld)
             </>
         ),
         examplehand: {
@@ -434,7 +446,7 @@ const YAKUS = [
         ),
         note: (
             <>
-                (Note: Score for dragon tile <b>Yakuhai</b> is accounted for)
+                Note: This yaku can't be formed without two dragon tile triplets so the <b>4 Han</b> score listed accounts for the combined <b>Yakuhai</b>.
             </>
         ),
         examplehand: {
@@ -478,7 +490,7 @@ const YAKUS = [
         ),
         note: (
             <>
-                (Note: Closed triplets can't be completed by calling <b>"Ron"</b>)
+                Note: Closed triplets can't be completed by calling <b>"Ron"</b>
             </>
         ),
         examplehand: {
@@ -651,7 +663,7 @@ const YAKUS = [
     },
     {
         jname: "Double Riichi",
-        ename: "Double Ready",
+        ename: "Double Riichi",
         type: "lucky",
         closedh: 2,
         openh: 0,
@@ -660,7 +672,11 @@ const YAKUS = [
                 Call <i><b>"Riichi"</b></i> before your first discard, and before any player makes a tile call.
             </>
         ),
-        note: null,
+        note: (
+            <>
+                Note: Does not combine scores with regular <b>Riichi</b> (Ready Hand)
+            </>
+        ),
         examplehand: null,
         difficulty: "full",
     },
@@ -726,7 +742,7 @@ const YAKUS = [
     },
     {
         jname: "Tenhou",
-        ename: "Double Ready",
+        ename: "Heavenly Hand",
         type: "luckyyakuman",
         closedh: "Yakuman",
         openh: 0,
@@ -765,7 +781,11 @@ const YAKUS = [
                 Reach exhaustive draw while every tile in your discard pile is a terminal or honor tile. None of your discards can be called by another player.
             </>
         ),
-        note: null,
+        note: (
+            <>
+                Note: Does not combine scores with any yaku or dora
+            </>
+        ),
         examplehand: null,
         difficulty: "full",
     },
