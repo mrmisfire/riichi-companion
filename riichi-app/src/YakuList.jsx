@@ -21,7 +21,7 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import NativeSelect from '@mui/material/NativeSelect';
 
-function YakuList({ mini, english, setEnglish, yakuTab, setYakuTab, lightTheme}) {
+function YakuList({ mini, english, setEnglish, yakuTab, setYakuTab, lightTheme, simpleMode}) {
   function getColor(cssVar) {
     const style = window.getComputedStyle(document.body);
     return style.getPropertyValue('--' + cssVar);
@@ -58,32 +58,56 @@ function YakuList({ mini, english, setEnglish, yakuTab, setYakuTab, lightTheme})
     setYakuTab(Number(event.target.value));
   };
 
-  const tabMenu = (
+  const tabMenuSimple = (
     <Tabs value={yakuTab} onChange={handleTabChange} sx={{ marginBottom: "20px" }} centered textColor={(lightTheme === "light" ? "#434343" : "#f5f5f5" )}>
       <Tab label="Beginner" />
       <Tab label="Intermediate" />
       <Tab label="All" />
       <Tab label="Standard" />
+      <Tab label="Open" />
       <Tab label="Yakuman" />
       <Tab label="Rare" />
     </Tabs>
   )
 
-  const dropMenu = (
+  const tabMenu = (
+  <Tabs value={yakuTab} onChange={handleTabChange} sx={{ marginBottom: "20px" }} centered textColor={(lightTheme === "light" ? "#434343" : "#f5f5f5" )}>
+    <Tab label="All" />
+    <Tab label="Standard" />
+    <Tab label="Open" />
+    <Tab label="Yakuman" />
+    <Tab label="Rare" />
+  </Tabs>
+  )
+
+  const dropMenuSimple = (
     <NativeSelect value={yakuTab} onChange={handleDropChange} sx={{ marginBottom: "20px", padding: "10px", borderRadius: "8px", backgroundColor: (lightTheme === "light" ? "white" : "#f5f5f5" ) }}>
       <option value={0}>Beginner</option>
       <option value={1}>Intermediate</option>
       <option value={2}>All</option>
       <option value={3}>Standard</option>
-      <option value={4}>Yakuman</option>
-      <option value={5}>Rare</option>
+      <option value={4}>Open</option>
+      <option value={5}>Yakuman</option>
+      <option value={6}>Rare</option>
     </NativeSelect>
   )
+
+  const dropMenu = (
+    <NativeSelect value={yakuTab} onChange={handleDropChange} sx={{ marginBottom: "20px", padding: "10px", borderRadius: "8px", backgroundColor: (lightTheme === "light" ? "white" : "#f5f5f5" ) }}>
+      <option value={2}>All</option>
+      <option value={3}>Standard</option>
+      <option value={4}>Open</option>
+      <option value={5}>Yakuman</option>
+      <option value={6}>Rare</option>
+    </NativeSelect>
+  )
+
+  const simpleModeAdd = (!mini && simpleMode == 3) ? 2 : 0
 
   useEffect(() => {
     const items = (<>
       {YAKUS.map((yaku) => (
-          <YakuItem mini={mini} yaku={yaku} english={english} yakuTab={yakuTab} lightTheme={lightTheme}/>
+          <YakuItem mini={mini} yaku={yaku} english={english} yakuTab={yakuTab + simpleModeAdd} lightTheme={lightTheme}/>
         ))}
     </>)
 
@@ -94,7 +118,8 @@ function YakuList({ mini, english, setEnglish, yakuTab, setYakuTab, lightTheme})
   return (
     <>
       <h1>Yaku List</h1>
-      {mini ? dropMenu : tabMenu}
+      {mini ? ((simpleMode == 3) ? dropMenu : dropMenuSimple) : ((simpleMode == 3) ? tabMenu : tabMenuSimple)}
+      <p>Winning hands <b>must</b> contain at least 1 <b>Yaku</b> to be valid.</p>
       <div className='yaku-list'>
         <Grid container spacing={2} alignItems="center" sx={{ margin: "12px 0", padding: "0 16px" }}>
           <Grid size={mini ? 6 : 8}>

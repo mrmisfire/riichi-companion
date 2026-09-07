@@ -22,7 +22,7 @@ const YAKUS = [
         openh: 0,
         description: (
             <>
-                Declare <i><b>"Riichi"</b></i> when in tenpai and bet 1,000 points.
+                Declare <i><b>"Riichi"</b></i> when in <b>Tenpai</b> and bet 1,000 points.
             </>
         ),
         note: null,
@@ -55,8 +55,8 @@ const YAKUS = [
                 Closed hand that scores no fu:
                 <ul>
                     <li>All melds are sequences</li>
-                    <li>Pair isn't a <b>1</b>, <b>9</b>, honor, round wind or player's seat wind</li>
-                    <li>Waiting to complete sequence with two non-terminal tiles at tenpai</li>
+                    <li>Pair isn't a dragon, round wind or player's seat wind</li>
+                    <li>Two-sided wait to complete a sequence meld at <b>Tenpai</b></li>
                 </ul>
             </>
         ),
@@ -77,12 +77,12 @@ const YAKUS = [
         openh: 0,
         description: (
             <>
-                Closed hand that contains two identical sequences.
+                Closed hand that contains two identical sequence melds.
             </>
         ),
         note: (
             <>
-                Note: Incompatible with <b>Chiitoitsu</b> (Seven Pairs)
+                Note: Incompatible with <b>Chiitoitsu</b> (Seven Pairs).
             </>
         ),
         examplehand: {
@@ -121,20 +121,20 @@ const YAKUS = [
         openh: 0,
         description: (
             <>
-                Closed hand that contains two sets of two identical sequences.
+                Closed hand that contains two sets of two identical sequence melds.
             </>
         ),
         note: (
             <>
-                Note: Incompatible with <b>Chiitoitsu</b> (Seven Pairs)<br></br>
+                Note: Incompatible with <b>Chiitoitsu</b> (Seven Pairs).<br></br>
                 <br></br>
-                Does not combine scores with <b>Iipeikou</b> (Identical Sequences)
+                Does not combine scores with <b>Iipeikou</b> (Identical Sequences).
             </>
         ),
         examplehand: {
-            hand: "112233m77p56677s",
+            hand: "112233m7p556677s",
             kan: null,
-            winning: ["5s"],
+            winning: ["7p"],
             tsumo: false,
         },
         difficulty: "full",
@@ -212,7 +212,7 @@ const YAKUS = [
         ),
         note: (
             <>
-                Note: Does not combine scores with <b>Chanta</b> (Terminal or Honor in Each Meld)
+                Note: Does not combine scores with <b>Chanta</b> (Terminal or Honor in Each Meld).
             </>
         ),
         examplehand: {
@@ -291,7 +291,7 @@ const YAKUS = [
         openh: "1 Han each",
         description: (
             <>
-                Hand contains a triplet of a dragon tile.
+                Hand contains a triplet meld of a dragon tile.
             </>
         ),
         note: null,
@@ -311,7 +311,7 @@ const YAKUS = [
         openh: "1 Han each",
         description: (
             <>
-                Hand contains a triplet of the round wind tile or the player's seat wind tile.
+                Hand contains a triplet meld of the round wind tile or the player's seat wind tile.
             </>
         ),
         note: null,
@@ -331,7 +331,7 @@ const YAKUS = [
         openh: 2,
         description: (
             <>
-                All melds are triplets.
+                All melds are triplet melds.
             </>
         ),
         note: null,
@@ -351,12 +351,12 @@ const YAKUS = [
         openh: 2,
         description: (
             <>
-                Hand contains three triplets that were entirely self-drawn.
+                Hand contains three triplet melds that were entirely self-drawn.
             </>
         ),
         note: (
             <>
-                Note: Closed triplets can't be completed by calling <b>"Ron"</b>
+                Note: Closed triplet melds can't be completed by calling <b>"Ron"</b>.
             </>
         ),
         examplehand: {
@@ -375,7 +375,7 @@ const YAKUS = [
         openh: 2,
         description: (
             <>
-                Hand contains three of the same triplet, one in each suit.
+                Hand contains three triplet melds of the same number, one in each suit.
             </>
         ),
         note: null,
@@ -422,7 +422,7 @@ const YAKUS = [
             <>
                 Note: This yaku can't be formed without either <b>Toitoi</b> (All Triplets) or <b>Chiitoitsu</b> (Seven Pairs) so the <b>4 Han</b> score listed accounts for either combination.<br></br>
                 <br></br>
-                Does not combine scores with <b>Chanta</b> (Terminal or Honor in Each Meld)
+                Does not combine scores with <b>Chanta</b> (Terminal or Honor in Each Meld).
             </>
         ),
         examplehand: {
@@ -441,12 +441,12 @@ const YAKUS = [
         openh: 4,
         description: (
             <>
-                Hand contains two triplets of dragon tiles, plus a pair of the third dragon tile.
+                Hand contains two triplet melds of dragon tiles, plus a pair of the third dragon tile.
             </>
         ),
         note: (
             <>
-                Note: This yaku can't be formed without two dragon tile triplets so the <b>4 Han</b> score listed accounts for the combined <b>Yakuhai</b>.
+                Note: This yaku can't be formed without two dragon tile triplets. The <b>4 Han</b> score listed accounts for the combined <b>Yakuhai</b>.
             </>
         ),
         examplehand: {
@@ -485,12 +485,12 @@ const YAKUS = [
         openh: 0,
         description: (
             <>
-                Closed hand that contains four triplets.
+                Closed hand that contains four triplet melds.
             </>
         ),
         note: (
             <>
-                Note: Closed triplets can't be completed by calling <b>"Ron"</b>
+                Note: Closed triplet melds can't be completed by calling <b>"Ron"</b>.
             </>
         ),
         examplehand: {
@@ -509,7 +509,7 @@ const YAKUS = [
         openh: 0,
         description: (
             <>
-                Closed hand that contains <b>1112345678999</b> in the same suit, plus one extra tile of that suit.
+                Closed hand that contains <b>111-2345678-999</b> in the same suit, plus one extra tile of that suit.
             </>
         ),
         note: null,
@@ -529,7 +529,7 @@ const YAKUS = [
         openh: "Yakuman",
         description: (
             <>
-                Hand contains triplets of all three dragon tiles.
+                Hand contains triplet melds of all three dragon tiles.
             </>
         ),
         note: null,
@@ -549,7 +549,7 @@ const YAKUS = [
         openh: "Yakuman",
         description: (
             <>
-                Hand contains three triplets of wind tiles, plus a pair of the fourth wind tile.
+                Hand contains three triplet melds of wind tiles, plus a pair of the fourth wind tile.
             </>
         ),
         note: null,
@@ -569,7 +569,7 @@ const YAKUS = [
         openh: "Yakuman",
         description: (
             <>
-                Hand contains triplets of all four wind tiles.
+                Hand contains triplet melds of all four wind tiles.
             </>
         ),
         note: null,
@@ -674,7 +674,7 @@ const YAKUS = [
         ),
         note: (
             <>
-                Note: Does not combine scores with regular <b>Riichi</b> (Ready Hand)
+                Note: Does not combine scores with regular <b>Riichi</b>.
             </>
         ),
         examplehand: null,
@@ -733,7 +733,7 @@ const YAKUS = [
         openh: 1,
         description: (
             <>
-                Win by calling <i><b>"Ron"</b></i> on a tile an opponent draws and adds to their open triplet to form a quadruplet.
+                Win by calling <i><b>"Ron"</b></i> on a tile an opponent draws and adds to their open triplet meld to form a quadruplet meld.
             </>
         ),
         note: null,
@@ -783,7 +783,7 @@ const YAKUS = [
         ),
         note: (
             <>
-                Note: Does not combine scores with any yaku or dora
+                Note: Does not combine scores with <b>Dora</b> or any other <b>Yaku</b>.
             </>
         ),
         examplehand: null,

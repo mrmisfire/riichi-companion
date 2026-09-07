@@ -29,6 +29,7 @@ function commaNum(num) {
 function ScoringTable({
   mini,
   lightTheme,
+  simpleMode,
   setScoringTab,
   simpleScoring,
   setSimpleScoring,
@@ -80,10 +81,10 @@ function ScoringTable({
           <tr><td className="cols3">1 Han</td><td className="cols3">-</td><td><b>{commaNum(!win ? SIMPLEPOINTS[0] * 3 : SIMPLEPOINTS[0])}</b> Points {!win ? null : "each"}</td></tr>
           <tr><td>2 Han</td><td>-</td><td><b>{commaNum(!win ? SIMPLEPOINTS[1] * 3 : SIMPLEPOINTS[1])}</b> Points {!win ? null : "each"}</td></tr>
           <tr><td>3 Han</td><td>-</td><td><b>{commaNum(!win ? SIMPLEPOINTS[2] * 3 : SIMPLEPOINTS[2])}</b> Points {!win ? null : "each"}</td></tr>
-          <tr><td>4-5 Han</td><td>Mangan</td><td><b>{commaNum(!win ? SIMPLEPOINTS[3] * 3 : SIMPLEPOINTS[3])}</b> Points {!win ? null : "each"}</td></tr>
-          <tr><td>6-7 Han</td><td>Haneman</td><td><b>{commaNum(!win ? SIMPLEPOINTS[4] * 3 : SIMPLEPOINTS[4])}</b> Points {!win ? null : "each"}</td></tr>
-          <tr><td>8-10 Han</td><td>Baiman</td><td><b>{commaNum(!win ? SIMPLEPOINTS[5] * 3 : SIMPLEPOINTS[5])}</b> Points {!win ? null : "each"}</td></tr>
-          <tr><td>11-12 Han</td><td>Sanbaiman</td><td><b>{commaNum(!win ? SIMPLEPOINTS[6] * 3 : SIMPLEPOINTS[6])}</b> Points {!win ? null : "each"}</td></tr>
+          <tr><td>4 - 5 Han</td><td>Mangan</td><td><b>{commaNum(!win ? SIMPLEPOINTS[3] * 3 : SIMPLEPOINTS[3])}</b> Points {!win ? null : "each"}</td></tr>
+          <tr><td>6 - 7 Han</td><td>Haneman</td><td><b>{commaNum(!win ? SIMPLEPOINTS[4] * 3 : SIMPLEPOINTS[4])}</b> Points {!win ? null : "each"}</td></tr>
+          <tr><td>8 - 10 Han</td><td>Baiman</td><td><b>{commaNum(!win ? SIMPLEPOINTS[5] * 3 : SIMPLEPOINTS[5])}</b> Points {!win ? null : "each"}</td></tr>
+          <tr><td>11 - 12 Han</td><td>Sanbaiman</td><td><b>{commaNum(!win ? SIMPLEPOINTS[6] * 3 : SIMPLEPOINTS[6])}</b> Points {!win ? null : "each"}</td></tr>
           <tr><td>13+ Han</td><td>Counted Yakuman</td><td><b>{commaNum(!win ? SIMPLEPOINTS[7] * 3 : SIMPLEPOINTS[7])}</b> Points {!win ? null : "each"}</td></tr>
       </tbody>
     </table>
@@ -113,14 +114,14 @@ function ScoringTable({
         )
       }
       fullRows.push(
-        <tr><td>{FULLROWHEADS[i][1]}</td><td>{name}</td>{points}</tr>
+        <tr><td>{FULLROWHEADS[i][1]} Han</td><td>{name}</td>{points}</tr>
       )
     }
 
     return (
       <table>
         <tbody className='td-score'>
-            <tr><td className="cols3">1-4 Han</td><td className="cols3">Fu Hand</td><td><a onClick={handleClick}>Calculate</a></td></tr>
+            <tr><td className="cols3">1 - 4 Han</td><td className="cols3">Fu Hand</td><td><a onClick={handleClick}>Calculate</a></td></tr>
             {fullRows}
         </tbody>
       </table>
@@ -146,17 +147,19 @@ function ScoringTable({
   return (
     <>
       <h2>Scoring Table</h2>
-      <Box style={{display: "flex"}}>
-        <FormGroup sx={{ padding: "0 16px", borderRadius: "8px", color: "black", backgroundColor: (lightTheme === "light" ? "white" : "#f5f5f5" ) }}>
-          <FormControlLabel control={
-            <Switch
-              checked={simpleScoring}
-              onChange={handleSimpleSwitchChange}
-              slotProps={{ input: { 'aria-label': 'controlled' } }}
-            />
-          } label="Simplified" />
-        </FormGroup>
-      </Box>
+      {(simpleMode != 1) ? null : <>
+        <Box style={{display: "flex"}}>
+          <FormGroup sx={{ padding: "0 16px" }}>
+            <FormControlLabel control={
+              <Switch
+                checked={simpleScoring}
+                onChange={handleSimpleSwitchChange}
+                slotProps={{ input: { 'aria-label': 'controlled' } }}
+              />
+            } label="Simplified" />
+          </FormGroup>
+        </Box>
+      </>}
       <Box sx={{ padding: "16px" }}>
         <span>Win type: </span>
         <NativeSelect value={win} onChange={handleWinDropChange} sx={{ padding: "0 16px", borderRadius: "8px", backgroundColor: (lightTheme === "light" ? "white" : "#f5f5f5" ) }}>

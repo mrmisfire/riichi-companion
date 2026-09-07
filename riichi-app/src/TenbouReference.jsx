@@ -68,7 +68,7 @@ function TenbouReference({ lightTheme, tenbouColor, setTenbouColor }) {
       <h2>Tenbou Point Sticks</h2>
       <div className='yaku-list'>
       <Box style={{display: "flex"}}>
-        <FormGroup sx={{ padding: "0 16px", borderRadius: "8px", color: "black", backgroundColor: (lightTheme === "light" ? "white" : "#f5f5f5" ) }}>
+        <FormGroup sx={{ padding: "0 16px" }}>
           <FormControlLabel control={
             <Switch
               checked={tenbouColor}

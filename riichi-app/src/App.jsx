@@ -41,16 +41,18 @@ const theme = createTheme({
 function App() {
   const [nav, setNav] = useState(0);
   const [mini, setMini] = useState(false);
+  const [simpleMode, setSimpleMode] = useState(import.meta.env.VITE_SIMPLE_MODE ? import.meta.env.VITE_SIMPLE_MODE : 3);
 
   const [tenbouColor, setTenbouColor] = useState(false);
   const [scoringTab, setScoringTab] = useState(0);
 
   const [english, setEnglish] = useState(true);
-  const [yakuTab, setYakuTab] = useState(2);
+  const [yakuTab, setYakuTab] = useState(simpleMode == 3 ? 0 : 2);
 
-  const [simpleScoring, setSimpleScoring] = useState(false);
+  const [simpleScoring, setSimpleScoring] = useState(simpleMode == 2 ? true : false);
   const [dealer, setDealer] = useState(1);
   const [han, setHan] = useState(1);
+  const [yakuman, setYakuman] = useState(0);
   const [honba, setHonba] = useState(0);
   const [chiitoitsu, setChiitoitsu] = useState(false);
   const [pinfu, setPinfu] = useState(false);
@@ -124,6 +126,8 @@ function App() {
 
   }, []);
 
+  console.log("SimpleMode: " + simpleMode)
+
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -131,21 +135,23 @@ function App() {
           sx={{
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'end',
+            justifyContent: 'space-between',
             borderRadius: 1,
           }}
         >
+          <span className='app-title'>Riichi Mahjong Companion - Created by Callum West 西</span>
           <IconButton sx={{ ml: 1 }} onClick={toggleTheme} color="inherit">
             {lightTheme === 'light' ? <LightModeIcon /> : <DarkModeIcon />}
           </IconButton>
         </Box>
         <Box sx={{ pb: 7, overflow: "auto" }}>
           {nav === 0 && <TileReference mini={mini} />}
-          {nav === 1 && <YakuList mini={mini} english={english} setEnglish={setEnglish} yakuTab={yakuTab} setYakuTab={setYakuTab} lightTheme={lightTheme} />}
+          {nav === 1 && <YakuList mini={mini} english={english} setEnglish={setEnglish} yakuTab={yakuTab} setYakuTab={setYakuTab} lightTheme={lightTheme} simpleMode={simpleMode} />}
           {nav === 2 && <Calls lightTheme={lightTheme} />}
           {nav === 3 && <Scoring
             mini={mini}
             lightTheme={lightTheme}
+            simpleMode={simpleMode}
             simpleScoring={simpleScoring}
             setSimpleScoring={setSimpleScoring}
             scoringTab={scoringTab}
@@ -156,6 +162,8 @@ function App() {
             setDealer={setDealer}
             han={han}
             setHan={setHan}
+            yakuman={yakuman}
+            setYakuman={setYakuman}
             honba={honba}
             setHonba={setHonba}
             chiitoitsu={chiitoitsu}

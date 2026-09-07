@@ -82,6 +82,12 @@ a:hover {
   display: none;
 }
 
+.app-title {
+  padding-left: 3vw;
+  font-weight: bold;
+  opacity: 0.4;
+}
+
 h1 {
   font-size: 2em;
   margin: 15px 0;
@@ -278,6 +284,13 @@ th {
   font-style: italic;
 }
 
+/*
+.score-zero {
+  font-size: 0.8em;
+  opacity: 0.5;
+}
+  */
+
 .td-score {
   font-weight: bold;
   background-color: var(--blue_mid);
@@ -296,12 +309,12 @@ table.td-main, table.td-fu, table.td-trip {
   border-spacing: 0 10px;
 }
 
-table.td-main tr {
+tr.td-main {
   background-color: var(--score_main);
   color: black;
 }
 
-table.td-fu tr {
+tr.td-fu {
   background-color: var(--score_fu);
   color: black;
 }
@@ -361,6 +374,12 @@ table.td-hanfu {
   padding: 20px 0;
   box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2);
   margin: 2em auto;
+  min-height: 170px;
+}
+
+tr.td-disabled {
+  background-color: var(--gray_dark);
+  color: rgba(0, 0, 0, 0.4)
 }
 
 h1.points, h2.points {
@@ -461,6 +480,10 @@ h1.invalid {
 }
 
 @media only screen and (max-width: 1300px) {
+  .app-title {
+    font-size: 0.6em;
+  }
+
   table {
     width: 100%;
   }

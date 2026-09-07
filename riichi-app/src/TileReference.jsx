@@ -22,10 +22,10 @@ function TileReference({ mini }) {
   const numHeaders = []
   for (let i = 1; i < 10; i++) {
     if (i === 1 || i === 9) {
-      numHeaders.push(<th className='th-terminal'>{i}</th>);
+      numHeaders.push(<th className='th-terminal' key={"tilehead-" + i}>{i}</th>);
     }
     else {
-      numHeaders.push(<th>{i}</th>);
+      numHeaders.push(<th key={"tilehead-" + i}>{i}</th>);
     }
   }
 
@@ -45,11 +45,13 @@ function TileReference({ mini }) {
         eng = "Bamboo";
         break;
     }
-    row.push(<th className={"th-" + suits[i]}><div className='ref-suit'>{eng}</div><div className='ref-suit abr'>{"(" + suits[i].charAt(0).toUpperCase() + suits[i].slice(1)+ ")"}</div></th>)
+    if (!mini) {
+      row.push(<th className={"th-" + suits[i]} key={"tilerow-" + i}><div className='ref-suit'>{eng}</div><div className='ref-suit abr'>{"(" + suits[i].charAt(0).toUpperCase() + suits[i].slice(1)+ ")"}</div></th>)
+    }
     for (let x = 1; x < 10; x++) {
       row.push(<td className={"td-" + suits[i]}><img src={"/tile_" + suits[i] + "_" + x + ".png"} className='ref-tiles' /></td>)
     }
-    tileRows.push(<tr>{row}</tr>);
+    tileRows.push(<tr key={"tilerow-" + i}>{row}</tr>);
   }
 
   const honTiles = []
@@ -134,7 +136,9 @@ function TileReference({ mini }) {
         <table>
           <thead>
             <tr className='th-num'>
-              <th rowSpan={2}>Suit</th>
+              {(mini) ? null : <>
+                <th rowSpan={2}>Suit</th>
+              </>}
               <th className='th-terminal'>Terminal</th>
               <th colSpan={7}>Simples</th>
               <th className='th-terminal'>Terminal</th>

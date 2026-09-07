@@ -64,14 +64,20 @@ function YakuItem({ mini, yaku, english, yakuTab, lightTheme }) {
         return (<></>)
       }
       break;
-    
+
     case 4:
-      if (!yaku["type"].includes("yakuman")) {
+      if (yaku["openh"] === 0 || yaku["type"].includes("lucky") || yaku["type"].includes("special")) {
         return (<></>)
       }
       break;
     
     case 5:
+      if (!yaku["type"].includes("yakuman")) {
+        return (<></>)
+      }
+      break;
+    
+    case 6:
       if (!yaku["type"].includes("lucky") && !yaku["type"].includes("special")) {
         return (<></>)
       }

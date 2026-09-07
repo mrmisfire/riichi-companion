@@ -28,11 +28,12 @@ function Calls({ lightTheme }) {
       <Box sx={{ textAlign: "left", padding: "0 16px" }}><h3></h3></Box>
       <Accordion sx={{ backgroundColor: (lightTheme === "light" ? "#e7f2fa" : "#3d85c6" ), color: (lightTheme === "light" ? "black" : "white" ) }}>
         <AccordionSummary sx={{ margin: "0px", display: "flex", flexDirection: "column" }} id="panel-header" aria-controls="panel-content">
-          <h2 className="yaku-main">"Chi"</h2>
+          <h2 className="yaku-main">"Chii"</h2>
         </AccordionSummary>
         <AccordionDetails sx={{ textAlign: "left" }}>
-          <p>You can call <b>"Chi"</b> when the <b>player to your left</b> discards a tile that could complete a <b>Sequence Meld</b> with two tiles from your hand.</p>
-          <p>Place the completed <b>Sequence Meld</b> face-up on the table. Your hand is now <b>Open</b>. Play continues to the player on your right.</p>
+          <p>You can call <b>"Chii"</b> when the <b>player to your left</b> discards a tile that could complete a <b>Sequence Meld</b> with two tiles from your hand.</p>
+          <p>Place the completed <b>Sequence Meld</b> face-up on the table, then discard a tile. Your hand is now <b>Open</b>. Play continues to the player on your right.</p>
+          <p className='yaku-note'>Note: The tile you discard after calling <b>"Chii"</b> cannot be one that would have completed the <b>Sequence Meld</b> you just made.</p>
         </AccordionDetails>
       </Accordion>
       <Accordion sx={{ backgroundColor: (lightTheme === "light" ? "#e7f2fa" : "#3d85c6" ), color: (lightTheme === "light" ? "black" : "white" ) }}>
@@ -41,7 +42,8 @@ function Calls({ lightTheme }) {
         </AccordionSummary>
         <AccordionDetails sx={{ textAlign: "left" }}>
           <p>You can call <b>"Pon"</b> when <b>any player</b> discards a tile that could complete a <b>Triplet Meld</b> with two identical tiles from your hand.</p>
-          <p>Place the completed <b>Triplet Meld</b> face-up on the table. Your hand is now <b>Open</b>. Play continues to the player on your right.</p>
+          <p>Place the completed <b>Triplet Meld</b> face-up on the table, then discard a tile. Your hand is now <b>Open</b>. Play continues to the player on your right.</p>
+          <p className='yaku-note'>Note: The tile you discard after calling <b>"Pon"</b> cannot be one that would have completed the <b>Triplet Meld</b> you just made.</p>
         </AccordionDetails>
       </Accordion>
       <Accordion sx={{ backgroundColor: (lightTheme === "light" ? "#e7f2fa" : "#3d85c6" ), color: (lightTheme === "light" ? "black" : "white" ) }}>

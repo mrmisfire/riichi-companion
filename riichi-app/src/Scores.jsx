@@ -11,9 +11,9 @@ const SIMPLEPOINTS = [
 
 const FULLROWHEADS = [
   ["mangan", "5"],
-  ["haneman", "6-7"],
-  ["baiman", "8-10"],
-  ["sanbaiman", "11-12"],
+  ["haneman", "6 - 7"],
+  ["baiman", "8 - 10"],
+  ["sanbaiman", "11 - 12"],
   ["yakuman", "13+"],
 ]
 
@@ -361,4 +361,13 @@ const FUPOINTS = {
   },
 }
 
-export {SIMPLEPOINTS, FULLROWHEADS, FULLPOINTS, FUPOINTS};
+const YAKUMAN_TUPLES = [
+  "",
+  "Double ",
+  "Triple ",
+  "Quadruple ",
+  "Quintuple ",
+  "Sextuple ",
+]
+
+export {SIMPLEPOINTS, FULLROWHEADS, FULLPOINTS, FUPOINTS, YAKUMAN_TUPLES};

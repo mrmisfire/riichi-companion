@@ -4,7 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import YakuTiles from './YakuTiles.jsx'
 import YAKUS from './Yakus.jsx'
-import { FULLPOINTS, FUPOINTS, SIMPLEPOINTS, FULLROWHEADS } from './Scores.jsx'
+import { FULLPOINTS, FUPOINTS, SIMPLEPOINTS, FULLROWHEADS, YAKUMAN_TUPLES } from './Scores.jsx'
 
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -34,12 +34,15 @@ function commaNum(num) {
 function FuCalculator({
   mini,
   lightTheme,
+  simpleMode,
   simpleScoring,
   setSimpleScoring,
   dealer,
   setDealer,
   han,
   setHan,
+  yakuman,
+  setYakuman,
   honba,
   setHonba,
   chiitoitsu,
@@ -76,6 +79,10 @@ function FuCalculator({
   
   const handleHanNumChange = (event) => {
     setHan(event);
+  };
+
+  const handleYakumanNumChange = (event) => {
+    setYakuman(event);
   };
 
   const handleHonbaNumChange = (event) => {
@@ -231,7 +238,7 @@ function FuCalculator({
   const tripletsTable = []
   for (let i = 0; i < 4; i++) {
     let disabled = true;
-    if (i < tripletNum) {
+    if (i < tripletNum && !chiitoitsu && !(win && pinfu) && yakuman < 1) {
       disabled = false;
     }
     tripletsTable.push(
@@ -258,82 +265,91 @@ function FuCalculator({
     )
   }
 
-  const pinfuInput = (<>
-    <tr>
-      <td className="cols2">Pinfu (<i>Minimum Fu</i>) Yaku</td>
-      <td className="cols2">
-        <Checkbox checked={pinfu} onChange={handlePinfuChange} />
-      </td>
-    </tr>
-  </>);
-
-  const closedInput = (<>
-    <tr>
-      <td className="cols2">Closed hand</td>
-      <td className="cols2">
-        <Checkbox checked={closedHand} onChange={handleClosedChange} />
-      </td>
-    </tr>
-  </>);
-
   function genScore() {
     if (simpleScoring) {
+      if (yakuman > 0) {
+        let name = YAKUMAN_TUPLES[yakuman - 1] + "Yakuman";
+        return (<tr>
+          <td className="cols2"><h1>{name}</h1></td>
+          <td className="cols2"><h1 className="points"><b>{commaNum((!win ? SIMPLEPOINTS[7] * 3 : SIMPLEPOINTS[7]) * yakuman).slice(0,-2)}<span className='score-zero'>00</span></b> Points {!win ? null : "each"}</h1></td>
+        </tr>)
+      }
       if (han < 2) {
         return (<tr>
           <td className="cols2"><h1 className="points"><b>1</b> Han</h1></td>
-          <td className="cols2"><h1 className="points"><b>{commaNum(!win ? SIMPLEPOINTS[0] * 3 : SIMPLEPOINTS[0])}</b> Points {!win ? null : "each"}</h1></td>
+          <td className="cols2"><h1 className="points"><b>{commaNum(!win ? SIMPLEPOINTS[0] * 3 : SIMPLEPOINTS[0]).slice(0,-2)}<span className='score-zero'>00</span></b> Points {!win ? null : "each"}</h1></td>
         </tr>)
       }
       else if (han < 3) {
         return (<tr>
           <td className="cols2"><h1 className="points"><b>2</b> Han</h1></td>
-          <td className="cols2"><h1 className="points"><b>{commaNum(!win ? SIMPLEPOINTS[1] * 3 : SIMPLEPOINTS[1])}</b> Points {!win ? null : "each"}</h1></td>
+          <td className="cols2"><h1 className="points"><b>{commaNum(!win ? SIMPLEPOINTS[1] * 3 : SIMPLEPOINTS[1]).slice(0,-2)}<span className='score-zero'>00</span></b> Points {!win ? null : "each"}</h1></td>
         </tr>)
       }
       else if (han < 4) {
         return (<tr>
           <td className="cols2"><h1 className="points"><b>3</b> Han</h1></td>
-          <td className="cols2"><h1 className="points"><b>{commaNum(!win ? SIMPLEPOINTS[2] * 3 : SIMPLEPOINTS[2])}</b> Points {!win ? null : "each"}</h1></td>
+          <td className="cols2"><h1 className="points"><b>{commaNum(!win ? SIMPLEPOINTS[2] * 3 : SIMPLEPOINTS[2]).slice(0,-2)}<span className='score-zero'>00</span></b> Points {!win ? null : "each"}</h1></td>
         </tr>)
       }
       else if (han < 6) {
         return (<tr>
           <td className="cols2"><h1>Mangan</h1></td>
-          <td className="cols2"><h1 className="points"><b>{commaNum(!win ? SIMPLEPOINTS[3] * 3 : SIMPLEPOINTS[3])}</b> Points {!win ? null : "each"}</h1></td>
+          <td className="cols2"><h1 className="points"><b>{commaNum(!win ? SIMPLEPOINTS[3] * 3 : SIMPLEPOINTS[3]).slice(0,-2)}<span className='score-zero'>00</span></b> Points {!win ? null : "each"}</h1></td>
         </tr>)
       }
       else if (han < 8) {
         return (<tr>
           <td className="cols2"><h1>Haneman</h1></td>
-          <td className="cols2"><h1 className="points"><b>{commaNum(!win ? SIMPLEPOINTS[4] * 3 : SIMPLEPOINTS[4])}</b> Points {!win ? null : "each"}</h1></td>
+          <td className="cols2"><h1 className="points"><b>{commaNum(!win ? SIMPLEPOINTS[4] * 3 : SIMPLEPOINTS[4]).slice(0,-2)}<span className='score-zero'>00</span></b> Points {!win ? null : "each"}</h1></td>
         </tr>)
       }
       else if (han < 11) {
         return (<tr>
           <td className="cols2"><h1>Baiman</h1></td>
-          <td className="cols2"><h1 className="points"><b>{commaNum(!win ? SIMPLEPOINTS[5] * 3 : SIMPLEPOINTS[5])}</b> Points {!win ? null : "each"}</h1></td>
+          <td className="cols2"><h1 className="points"><b>{commaNum(!win ? SIMPLEPOINTS[5] * 3 : SIMPLEPOINTS[5]).slice(0,-2)}<span className='score-zero'>00</span></b> Points {!win ? null : "each"}</h1></td>
         </tr>)
       }
       else if (han < 13) {
         return (<tr>
           <td className="cols2"><h1>Sanbaiman</h1></td>
-          <td className="cols2"><h1 className="points"><b>{commaNum(!win ? SIMPLEPOINTS[6] * 3 : SIMPLEPOINTS[6])}</b> Points {!win ? null : "each"}</h1></td>
+          <td className="cols2"><h1 className="points"><b>{commaNum(!win ? SIMPLEPOINTS[6] * 3 : SIMPLEPOINTS[6]).slice(0,-2)}<span className='score-zero'>00</span></b> Points {!win ? null : "each"}</h1></td>
         </tr>)
       }
       else {
         return (<tr>
           <td className="cols2"><h1>Counted Yakuman</h1></td>
-          <td className="cols2"><h1 className="points"><b>{commaNum(!win ? SIMPLEPOINTS[7] * 3 : SIMPLEPOINTS[7])}</b> Points {!win ? null : "each"}</h1></td>
+          <td className="cols2"><h1 className="points"><b>{commaNum(!win ? SIMPLEPOINTS[7] * 3 : SIMPLEPOINTS[7]).slice(0,-2)}<span className='score-zero'>00</span></b> Points {!win ? null : "each"}</h1></td>
         </tr>)
       }
     }
     let points;
     const honbaAdd = win ? honba * 100 : honba * 300;
+
+    if (yakuman > 0) {
+      let name = YAKUMAN_TUPLES[yakuman - 1] + "Yakuman";
+      points = (<h1 className="points"><b>{commaNum((FULLPOINTS["yakuman"][dealer ? "dealer" : "non"][win === 0 ? "ron" : "tsumo"] * yakuman) + honbaAdd)}</b> Points {!win ? null : "each"}</h1>)
+      if (!dealer && win) {
+        points = (<>
+          <div>Non-dealers pay:</div>
+          <h2 className="points"><b>{commaNum((FULLPOINTS["yakuman"]["non"]["tsumo"][0] * yakuman) + honbaAdd)}</b> Points</h2>
+          <div>Dealer pays:</div>
+          <h2 className="points"><b>{commaNum((FULLPOINTS["yakuman"]["non"]["tsumo"][1] * yakuman) + honbaAdd)}</b> Points</h2>
+        </>)
+      }
+      return (<tr>
+        <td className="cols2">
+          <h1>{name}</h1>
+        </td>
+        <td className="cols2">{points}</td>
+      </tr>)
+    }
+
     if (han < 5) {
       const fu = calcFu();
       if (han < 2 && fu === 20 && !pinfu) {
         return (<tr><td>
-          <h1>Calculate fu below</h1>
+          <h1>Calculate score below</h1>
         </td></tr>)
       }
       if (fu === "closed") {
@@ -417,17 +433,19 @@ function FuCalculator({
   return (
     <>
       <h2>Score Calculator</h2>
-      <Box style={{display: "flex"}}>
-        <FormGroup sx={{ padding: "0 16px", borderRadius: "8px", color: "black", backgroundColor: (lightTheme === "light" ? "white" : "#f5f5f5" ) }}>
-          <FormControlLabel control={
-            <Switch
-              checked={simpleScoring}
-              onChange={handleSimpleSwitchChange}
-              slotProps={{ input: { 'aria-label': 'controlled' } }}
-            />
-          } label="Simplified" />
-        </FormGroup>
-      </Box>
+      {(simpleMode != 1) ? null : <>
+        <Box style={{display: "flex"}}>
+          <FormGroup sx={{ padding: "0 16px" }}>
+            <FormControlLabel control={
+              <Switch
+                checked={simpleScoring}
+                onChange={handleSimpleSwitchChange}
+                slotProps={{ input: { 'aria-label': 'controlled' } }}
+              />
+            } label="Simplified" />
+          </FormGroup>
+        </Box>
+      </>}
       <Box sx={{ padding: "16px" }}>
         <span>Win type: </span>
         <NativeSelect value={win} onChange={handleWinDropChange} sx={{ padding: "0 16px", borderRadius: "8px", backgroundColor: (lightTheme === "light" ? "white" : "#f5f5f5" ) }}>
@@ -450,13 +468,19 @@ function FuCalculator({
       </div>
       <table className='td-main'>
         <tbody>
-          <tr>
+          <tr className={'td-main' + (yakuman > 0 ? " td-disabled" : "")}>
             <td className="cols2">Han from <b>Yaku</b> and <b>Dora</b></td>
             <td className="cols2">
-              <NumberSpinner id="han-num" min={1} max={13} value={han} onValueChange={handleHanNumChange} />
+              <NumberSpinner id="han-num" min={1} max={13} value={han} onValueChange={handleHanNumChange} disabled={yakuman > 0} />
             </td>
           </tr>
-          {simpleScoring ? null : <tr>
+          <tr className='td-main'>
+            <td className="cols2">Yakuman</td>
+            <td className="cols2">
+              <NumberSpinner id="yakuman-num" min={0} max={6} value={yakuman} onValueChange={handleYakumanNumChange} />
+            </td>
+          </tr>
+          {simpleScoring ? null : <tr className='td-main'>
             <td className="cols2">Honba</td>
             <td className="cols2">
               <NumberSpinner id="honba-num" min={0} max={20} value={honba} onValueChange={handleHonbaNumChange} />
@@ -464,62 +488,67 @@ function FuCalculator({
           </tr>}
         </tbody>
       </table>
-      {(simpleScoring || han > 4) ? null : <>
+      {(simpleScoring) ? null : <>
         <h2>Calculate Fu</h2>
         <table className='td-fu'>
           <tbody>
-            {win && pinfu ? null : <>
-              <tr>
-                <td className="cols2">Chiitoitsu (<i>Seven Pairs</i>) Yaku</td>
-                <td className="cols2">
-                  <Checkbox checked={chiitoitsu} onChange={handleChiitoitsuChange} />
-                </td>
-              </tr>
-            </>}
-            {chiitoitsu ? null : <>
-              {win ? pinfuInput : closedInput}
-              {(win && pinfu) ? null : <>
-                <tr>
-                  <td className="cols2">
-                    Pair is
-                    <div className="ul-container"><ul>
-                      <li>Dragon</li>
-                      <li>Seat Wind</li>
-                      <li>Round Wind</li>
-                    </ul></div>
-                  </td>
-                  <td className="cols2">
-                    <Checkbox checked={valuePair} onChange={handleValuePairChange} />
-                  </td>
-                </tr>
-                <tr>
-                  <td className="cols2">
-                    Waiting for
-                    <div className="ul-container"><ul>
-                      <li>Middle tile of sequence</li>
-                      <li>Tile to complete edge sequence<br/>(<b>1-2-3</b> or <b>7-8-9</b>)</li>
-                      <li>Tile to complete single pair</li>
-                    </ul></div>
-                  </td>
-                  <td className="cols2">
-                    <Checkbox checked={closedWait} onChange={handleClosedWaitChange} />
-                  </td>
-                </tr>
-                <tr>
-                  <td>Number of triplets/kans</td>
-                  <td>
-                    <NumberSpinner min={0} max={4} value={tripletNum} onValueChange={handleTripNumChange} />
-                  </td>
-                </tr>
-              </>}
-            </>}
+            <tr className={'td-fu' + ((win && pinfu) || han > 4  || yakuman > 0 ? " td-disabled" : "")}>
+              <td className="cols2">Chiitoitsu (<i>Seven Pairs</i>) Yaku</td>
+              <td className="cols2">
+                <Checkbox checked={chiitoitsu} onChange={handleChiitoitsuChange} disabled={(win && pinfu) || han > 4  || yakuman > 0} />
+              </td>
+            </tr>
+            <tr className={'td-fu' + (win && !chiitoitsu && han < 5  && yakuman < 1 ? "" : " td-disabled")}>
+              <td className="cols2">Pinfu (<i>Minimum Fu</i>) Yaku</td>
+              <td className="cols2">
+                <Checkbox checked={pinfu} onChange={handlePinfuChange} disabled={!win || chiitoitsu || han > 4  || yakuman > 0} />
+              </td>
+            </tr>
+            <tr className={'td-fu' + (win || chiitoitsu || han > 4  || yakuman > 0 ? " td-disabled" : "")}>
+              <td className="cols2">Closed hand</td>
+              <td className="cols2">
+                <Checkbox checked={closedHand} onChange={handleClosedChange} disabled={win || chiitoitsu || han > 4  || yakuman > 0} />
+              </td>
+            </tr>
+            <tr className={'td-fu' + ((win && pinfu) || chiitoitsu || han > 4  || yakuman > 0 ? " td-disabled" : "")}>
+              <td className="cols2">
+                Pair is
+                <div className="ul-container"><ul>
+                  <li>Dragon</li>
+                  <li>Seat Wind</li>
+                  <li>Round Wind</li>
+                </ul></div>
+              </td>
+              <td className="cols2">
+                <Checkbox checked={valuePair} onChange={handleValuePairChange} disabled={(win && pinfu) || chiitoitsu || han > 4  || yakuman > 0} />
+              </td>
+            </tr>
+            <tr className={'td-fu' + ((win && pinfu) || chiitoitsu || han > 4  || yakuman > 0 ? " td-disabled" : "")}>
+              <td className="cols2">
+                Waiting for
+                <div className="ul-container"><ul>
+                  <li>Middle tile of sequence</li>
+                  <li>Tile to complete edge sequence<br/>(<b>1-2-3</b> or <b>7-8-9</b>)</li>
+                  <li>Tile to complete single pair</li>
+                </ul></div>
+              </td>
+              <td className="cols2">
+                <Checkbox checked={closedWait} onChange={handleClosedWaitChange} disabled={(win && pinfu) || chiitoitsu || han > 4  || yakuman > 0} />
+              </td>
+            </tr>
+            <tr className={'td-fu' + ((win && pinfu) || chiitoitsu || han > 4  || yakuman > 0 ? " td-disabled" : "")}>
+              <td>Number of triplets/kans</td>
+              <td>
+                <NumberSpinner min={0} max={4} value={tripletNum} onValueChange={handleTripNumChange} disabled={(win && pinfu) || chiitoitsu || han > 4 || yakuman > 0} />
+              </td>
+            </tr>
           </tbody>
         </table>
-        {chiitoitsu || (win && pinfu) ? null : <table className='td-trip'>
+        <table className='td-trip'>
           <tbody>
             {tripletsTable}
           </tbody>
-        </table>}
+        </table>
       </>}
     </>
   )

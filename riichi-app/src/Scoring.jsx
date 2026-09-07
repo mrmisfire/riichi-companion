@@ -24,6 +24,7 @@ import NativeSelect from '@mui/material/NativeSelect';
 function Scoring({
   mini,
   lightTheme,
+  simpleMode,
   simpleScoring,
   setSimpleScoring,
   scoringTab,
@@ -34,6 +35,8 @@ function Scoring({
   setDealer,
   han,
   setHan,
+  yakuman,
+  setYakuman,
   honba,
   setHonba,
   chiitoitsu,
@@ -142,12 +145,15 @@ function Scoring({
       {scoringTab === 0 && <FuCalculator
         mini={mini}
         lightTheme={lightTheme}
+        simpleMode={simpleMode}
         simpleScoring={simpleScoring}
         setSimpleScoring={setSimpleScoring}
         dealer={dealer}
         setDealer={setDealer}
         han={han}
         setHan={setHan}
+        yakuman={yakuman}
+        setYakuman={setYakuman}
         honba={honba}
         setHonba={setHonba}
         chiitoitsu={chiitoitsu}
@@ -170,6 +176,7 @@ function Scoring({
       {scoringTab === 1 && <ScoringTable
         mini={mini}
         lightTheme={lightTheme}
+        simpleMode={simpleMode}
         setScoringTab={setScoringTab}
         simpleScoring={simpleScoring}
         setSimpleScoring={setSimpleScoring}
